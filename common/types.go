@@ -17,7 +17,6 @@
 package common
 
 import (
-	"database/sql/driver"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
@@ -150,11 +149,6 @@ func (h *Hash) Scan(src interface{}) error {
 	return nil
 }
 
-// Value implements valuer for database/sql.
-func (h Hash) Value() (driver.Value, error) {
-	return h[:], nil
-}
-
 // UnprefixedHash allows marshaling a Hash without 0x prefix.
 type UnprefixedHash Hash
 
@@ -275,11 +269,6 @@ func (a *Address) Scan(src interface{}) error {
 	}
 	copy(a[:], srcB)
 	return nil
-}
-
-// Value implements valuer for database/sql.
-func (a Address) Value() (driver.Value, error) {
-	return a[:], nil
 }
 
 // UnprefixedAddress allows marshaling an Address without 0x prefix.
